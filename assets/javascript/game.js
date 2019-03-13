@@ -1,7 +1,11 @@
 
 var computerChoices = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+var computerGuess = pickLetter();
+
+function pickLetter(){
+    return computerChoices[Math.floor(Math.random() * computerChoices.length)];
+}
 
 var win = 0;
 var losses = 0;
@@ -15,12 +19,16 @@ var guessSoFarText = document.getElementById("guessSoFar");
 
 document.onkeyup = function(event) {
      var userGuess = event.key.toLowerCase();
+     if(computerChoices.indexOf(userGuess) === -1){
+         alert("Please choose a letter!");
+         return;
+     }
 
      if(userGuess === computerGuess){
          win++;
          guessLeft = 10;
          guessSoFar = "";
-         computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+         computerGuess = pickLetter();
      }
 
      else{
@@ -30,7 +38,7 @@ document.onkeyup = function(event) {
              losses++;
              guessLeft = 10;
              guessSoFar = "";
-             computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+             computerGuess = pickLetter();
          }         
      }
 
